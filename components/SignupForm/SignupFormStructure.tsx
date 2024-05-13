@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC, FormEvent, Key, useState } from 'react'
+import React, { ChangeEvent, FC, FormEvent, Key, useRef, useState } from 'react'
 import Link from 'next/link';
 import { ErrorMessage, FormSection, Label, SignupFormContainer, TermsLink } from "./SignupFormStyle";
 import { useAppDispatch } from '@/hooks/store';
@@ -7,6 +7,7 @@ import { setNewsletterState } from '@/store/newsletterSlice';
 const SignupFormStructure: FC<{ termsUrl?: string }> = ({ termsUrl = '#' }) => {
   const [validationErrors, setValidationErrors] = useState<Array<String>>([]);
   const dispatch = useAppDispatch();
+  const formRef = useRef<HTMLFormElement>(null);
 
   const isEmailValid = (email: string) => {
     const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
@@ -42,8 +43,19 @@ const SignupFormStructure: FC<{ termsUrl?: string }> = ({ termsUrl = '#' }) => {
     if (!isError) {
       console.log('submit form');
 
+      let message = `Your email ${formJson.email} successfully subscribed to the newsletter`;
+
+      if ('interestCategory' in formJson) {
+        const category = formJson.interestCategory.toString();
+        const categoryText = category.charAt(0).toUpperCase() + category.slice(1);
+
+        message += ` with the category ${categoryText}`;
+      }
+
+      formRef.current && formRef.current.reset();
+
       dispatch(setNewsletterState({
-        message: 'test',
+        message,
         isSubmitted: true
       }));
     }
@@ -51,7 +63,7 @@ const SignupFormStructure: FC<{ termsUrl?: string }> = ({ termsUrl = '#' }) => {
 
   return (
     <SignupFormContainer>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} ref={formRef}>
         <FormSection>
           <Label required htmlFor="email">
             Your email

@@ -1,4 +1,4 @@
-import { getAlertMessage } from "./getAlertMessage";
+import { getAlertMessage } from './getAlertMessage';
 
 describe('getAlertMessage', () => {
   it('returns correct message without category', () => {
@@ -10,7 +10,7 @@ describe('getAlertMessage', () => {
     expect(getAlertMessage(formData)).toBe(message);
   })
 
-  it('returns correct message without category', () => {
+  it('returns correct message with selected category', () => {
     const formData = {
       email: 'bar@email.com',
       interestCategory: 'shoes'

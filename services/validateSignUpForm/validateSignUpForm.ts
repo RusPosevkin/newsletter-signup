@@ -1,9 +1,4 @@
-import { validateEmail } from "..";
-
-type ValidateSignUpFormResult = {
-  isValid: boolean;
-  messages: Array<string>;
-}
+import { validateEmail } from '..';
 
 export const validateSignUpForm = (formData: FormDataEntries): ValidateSignUpFormResult => {
   let isValid = true;
@@ -23,20 +18,6 @@ export const validateSignUpForm = (formData: FormDataEntries): ValidateSignUpFor
     messages.push('Please accept terms and conditions')
     isValid = false;
   }
-
-  // if (isValid) {
-  //   let message = `Your email ${formData.email} successfully subscribed to the newsletter`;
-
-  //   if ('interestCategory' in formData) {
-  //     const category = formData.interestCategory.toString();
-  //     const categoryText = category.charAt(0).toUpperCase() + category.slice(1);
-
-  //     message += ` with the category ${categoryText}`;
-  //   }
-
-  //   messages.push(message);
-  // }
-
 
   return { isValid, messages };
 };

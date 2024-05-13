@@ -1,5 +1,4 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { useDispatch, TypedUseSelectorHook, useSelector } from "react-redux";
 import { newsletterReducer } from "./newsletterSlice";
 
 export const store = configureStore({

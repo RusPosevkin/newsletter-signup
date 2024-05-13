@@ -1,12 +1,12 @@
-import { validateEmail } from "..";
-import { validateSignUpForm } from "./validateSignUpForm";
+import { validateEmail } from '..';
+import { validateSignUpForm } from './validateSignUpForm';
 
 jest.mock('..')
 const mockValidateEmail = validateEmail as jest.Mock;
 
 describe('validateSignUpForm', () => {
   describe('when email is empty', () => {
-    describe('and terms was accepted', () => {
+    describe('and terms were accepted', () => {
       it('returns not valid and message email is required', () => {
         const formData = {
           email: '',
@@ -22,7 +22,7 @@ describe('validateSignUpForm', () => {
       })
     })
 
-    describe('and terms was not accepted', () => {
+    describe('and terms were not accepted', () => {
       it('returns not valid and two messages – email is required and terms should be accepted', () => {
         const formData = {
           email: ''
@@ -43,7 +43,7 @@ describe('validateSignUpForm', () => {
 
   describe('when email is filled', () => {
     describe('and incorrect', () => {
-      describe('and terms was accepted', () => {
+      describe('and terms were accepted', () => {
         it('returns not valid and message invalid email', () => {
           const email = 'incorrect';
           const formData = {
@@ -65,7 +65,7 @@ describe('validateSignUpForm', () => {
         })
       })
 
-      describe('and terms was not accepted', () => {
+      describe('and terms were not accepted', () => {
         it('returns not valid and two messages – invalid email and terms should be accepted', () => {
           const email = 'incorrect';
           const formData = { email };
@@ -85,7 +85,7 @@ describe('validateSignUpForm', () => {
       })
     })
     describe('and correct', () => {
-      describe('and terms was accepted', () => {
+      describe('and terms were accepted', () => {
         it('returns valid and empty messages', () => {
           const email = 'correct@email.com';
           const formData = {
@@ -107,7 +107,7 @@ describe('validateSignUpForm', () => {
         })
       })
 
-      describe('and terms was not accepted', () => {
+      describe('and terms were not accepted', () => {
         it('returns not valid and message terms should be accepted', () => {
           const email = 'correct@email.com';
           const formData = { email };

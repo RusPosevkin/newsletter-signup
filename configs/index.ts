@@ -11,4 +11,5 @@ export const theme: DefaultTheme = {
 // time in milliseconds for showing alert message
 export const ALERT_DELAY_TIMEOUT = 5000;
 
+// time in milliseconds for alert's show/hide animation
 export const ALERT_ANIMATION_DELAY = 500;

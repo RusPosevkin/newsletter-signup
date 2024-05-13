@@ -1,31 +1,25 @@
 import React, { FC, useEffect, useState } from 'react'
-import { AlertContainer, Fade } from "./AlertStyle";
+
 import { ALERT_ANIMATION_DELAY, ALERT_DELAY_TIMEOUT } from '@/configs';
 import { useAppDispatch } from '@/hooks/store';
 import { resetNewsletterState } from '@/store/newsletterSlice';
+import { AlertContainer } from './AlertStyle';
 
 const AlertStructure: FC<IAlert> = ({ message, showAlert }) => {
   const dispatch = useAppDispatch();
-  // const [fade, setFade] = useState(false);
-  const [fade, setFade] = useState(true);
+  const [isHidden, setIsHidden] = useState(true);
 
   useEffect(() => {
-    // if (showAlert) {
-    //   const timeoutId = setTimeout(() => {
-    //     // dispatch(resetNewsletterState());
-    //   }, ALERT_DELAY_TIMEOUT);
-
-    //   return () => clearTimeout(timeoutId);
-    // }
     if (showAlert) {
-      setFade(false)
+      setIsHidden(false);
+
+      // scheduling hiding alert
       const timeoutId = setTimeout(() => {
-        setFade(true);
-        // dispatch(resetNewsletterState());
+        setIsHidden(true);
       }, ALERT_DELAY_TIMEOUT);
 
+      // scheduling resetting state after finishing the alert's hiding animation
       const timeoutDispatchId = setTimeout(() => {
-        // setFade(true);
         dispatch(resetNewsletterState());
       }, ALERT_DELAY_TIMEOUT + ALERT_ANIMATION_DELAY);
 
@@ -34,22 +28,14 @@ const AlertStructure: FC<IAlert> = ({ message, showAlert }) => {
         clearTimeout(timeoutDispatchId);
       };
     } else {
-      setFade(true);
+      setIsHidden(true);
     }
   }, [showAlert])
-  console.log('fade/ out :', fade)
 
-  // return (
-  //   showAlert ? (
-  //     <AlertContainer>
-  //       <h1>{message}</h1>
-  //     </AlertContainer >
-  //   ) : null
-  // );
   return (
-    <Fade data-hidden={fade}>
+    <AlertContainer data-hidden={isHidden}>
       <h1>{message}</h1>
-    </Fade >
+    </AlertContainer >
   );
 }
 

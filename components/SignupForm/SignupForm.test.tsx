@@ -1,9 +1,9 @@
-import { fireEvent, render, screen } from "@testing-library/react";
-import "@testing-library/jest-dom";
-import { ThemeProvider } from "styled-components";
-import { Provider } from "react-redux";
-import { theme } from "@/configs";
-import { store } from "@/store/store";
+import { fireEvent, render, screen } from '@testing-library/react';
+import '@testing-library/jest-dom';
+import { ThemeProvider } from 'styled-components';
+import { Provider } from 'react-redux';
+import { theme } from '@/configs';
+import { store } from '@/store/store';
 import SignupForm from '.'
 
 const withProviders = (children: React.JSX.Element) => (
@@ -59,7 +59,7 @@ test('it should validate incorrect email', async () => {
   const termsCheckbox = screen.getByTestId('checkbox-terms');
   const submitButton = screen.getByTestId('button-submit');
 
-  fireEvent.change(emailInput, { target: { value: "incorrect" } });
+  fireEvent.change(emailInput, { target: { value: 'incorrect' } });
   fireEvent.click(termsCheckbox);
   fireEvent.click(submitButton);
 
@@ -82,7 +82,7 @@ test('it should reset previous validation errors between validations', async () 
   expect(screen.getByText('Please enter your email address')).toBeInTheDocument();
   expect(screen.getByText('Please accept terms and conditions')).toBeInTheDocument();
 
-  fireEvent.change(emailInput, { target: { value: "incorrect" } });
+  fireEvent.change(emailInput, { target: { value: 'incorrect' } });
   fireEvent.click(termsCheckbox);
 
   fireEvent.click(submitButton);
@@ -102,16 +102,17 @@ test('it should reset form after successful validation and form submit', async (
   const categorySelect = screen.getByTestId('select-category');
   const termsCheckbox = screen.getByTestId('checkbox-terms');
 
-  fireEvent.change(emailInput, { target: { value: "correct@email.com" } });
-  fireEvent.change(categorySelect, { target: { value: "heels" } });
+  fireEvent.change(emailInput, { target: { value: 'correct@email.com' } });
+  fireEvent.change(categorySelect, { target: { value: 'heels' } });
   fireEvent.click(termsCheckbox);
 
-  expect(emailInput).toHaveValue("correct@email.com");
-  expect(categorySelect).toHaveValue("heels");
+  expect(emailInput).toHaveValue('correct@email.com');
+  expect(categorySelect).toHaveValue('heels');
   expect(termsCheckbox).toBeChecked();
+
   fireEvent.click(submitButton);
 
-  expect(emailInput).toHaveValue("");
-  expect(categorySelect).toHaveValue("default");
+  expect(emailInput).toHaveValue('');
+  expect(categorySelect).toHaveValue('default');
   expect(termsCheckbox).not.toBeChecked();
 });

@@ -1,9 +1,10 @@
-import React, { ChangeEvent, FC, FormEvent, Key, useRef, useState } from 'react'
+import React, { FC, FormEvent, Key, useRef, useState } from 'react'
 import Link from 'next/link';
-import { ErrorMessage, FormSection, Label, SignupFormContainer, TermsLink } from "./SignupFormStyle";
+
 import { useAppDispatch } from '@/hooks/store';
 import { setNewsletterState } from '@/store/newsletterSlice';
-import { getAlertMessage, validateEmail, validateSignUpForm } from '@/services';
+import { getAlertMessage, validateSignUpForm } from '@/services';
+import { ErrorMessage, FormSection, Label, SignupFormContainer, TermsLink } from './SignupFormStyle';
 
 const SignupFormStructure: FC<{ termsUrl?: string }> = ({ termsUrl = '#' }) => {
   const [validationErrors, setValidationErrors] = useState<Array<String>>([]);
@@ -12,12 +13,14 @@ const SignupFormStructure: FC<{ termsUrl?: string }> = ({ termsUrl = '#' }) => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    // reset previous errors
     setValidationErrors([]);
 
     const form = e.currentTarget;
     const formData = new FormData(form);
     const formJson = Object.fromEntries(formData.entries());
-    console.log(formJson);
+
     const {
       isValid,
       messages
@@ -27,8 +30,6 @@ const SignupFormStructure: FC<{ termsUrl?: string }> = ({ termsUrl = '#' }) => {
       setValidationErrors(messages);
       return;
     }
-
-    console.log('submit form');
 
     const message = getAlertMessage(formJson);
 

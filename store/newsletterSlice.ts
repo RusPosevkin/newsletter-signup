@@ -24,8 +24,15 @@ export const newsletterSlice = createSlice({
     setNewsletterState: (state, action: PayloadAction<NewsletterState>) => {
       state.newsletterState = action.payload;
     },
+    resetNewsletterState: (state) => {
+      state.newsletterState = initialState.newsletterState;
+    },
   },
 });
 
-export const { setNewsletterState } = newsletterSlice.actions;
+export const {
+  setNewsletterState,
+  resetNewsletterState
+} = newsletterSlice.actions;
+
 export const newsletterReducer = newsletterSlice.reducer;

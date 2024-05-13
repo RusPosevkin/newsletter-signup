@@ -23,24 +23,6 @@ const SignupFormStructure: FC<{ termsUrl?: string }> = ({ termsUrl = '#' }) => {
       messages
     } = validateSignUpForm(formJson);
 
-    // let isError = false;
-
-    // if (!('email' in formJson) || formJson.email === '') {
-    //   setValidationErrors((prev) => [...prev, 'Please enter your email address'])
-    //   isError = true;
-    // } else {
-    //   // if (!isEmailValid(formJson.email.toString())) {
-    //   if (!validateEmail(formJson.email.toString())) {
-    //     setValidationErrors((prev) => [...prev, 'Invalid email format'])
-    //     isError = true;
-    //   }
-    // }
-
-    // if (!('terms' in formJson)) {
-    //   setValidationErrors((prev) => [...prev, 'Please accept terms and conditions'])
-    //   isError = true;
-    // }
-
     if (!isValid) {
       setValidationErrors(messages);
       return;
@@ -48,22 +30,12 @@ const SignupFormStructure: FC<{ termsUrl?: string }> = ({ termsUrl = '#' }) => {
 
     console.log('submit form');
 
-    // let message = `Your email ${formJson.email} successfully subscribed to the newsletter`;
-
-    // if ('interestCategory' in formJson) {
-    //   const category = formJson.interestCategory.toString();
-    //   const categoryText = category.charAt(0).toUpperCase() + category.slice(1);
-
-    //   message += ` with the category ${categoryText}`;
-    // }
     const message = getAlertMessage(formJson);
-
 
     dispatch(setNewsletterState({
       message,
       isSubmitted: true
     }));
-
 
     // reset form
     formRef.current && formRef.current.reset();
@@ -79,13 +51,14 @@ const SignupFormStructure: FC<{ termsUrl?: string }> = ({ termsUrl = '#' }) => {
           <input
             id="email"
             name="email"
+            data-testid="input-email"
             placeholder='Enter your email address'
           />
         </FormSection>
         <FormSection>
           <Label>
             I'm interested in { }
-            <select name="interestCategory" defaultValue="default">
+            <select name="interestCategory" defaultValue="default" data-testid="select-category">
               <option value="default" disabled>choose a category</option>
               <option value="shoes">Shoes</option>
               <option value="heels">Heels</option>
@@ -95,7 +68,7 @@ const SignupFormStructure: FC<{ termsUrl?: string }> = ({ termsUrl = '#' }) => {
           </Label>
         </FormSection>
         <FormSection>
-          <input type="checkbox" name="terms" id="terms" />
+          <input type="checkbox" name="terms" id="terms" data-testid="checkbox-terms" />
           <Label required htmlFor="terms">
             I agree to the { }
             <Link href={termsUrl} passHref legacyBehavior>
@@ -112,7 +85,7 @@ const SignupFormStructure: FC<{ termsUrl?: string }> = ({ termsUrl = '#' }) => {
             ))}
           </ErrorMessage>)
         }
-        <button type="submit">Subscribe</button>
+        <button type="submit" data-testid="button-submit">Subscribe</button>
       </form>
     </SignupFormContainer>
   );

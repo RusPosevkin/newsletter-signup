@@ -1,0 +1,99 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`it should match the snapshot and render 1`] = `
+<div>
+  <div
+    class="sc-ae70ea4f-0 dvPLfn"
+  >
+    <form>
+      <section
+        class="sc-ae70ea4f-2 emiEpD"
+      >
+        <label
+          class="sc-ae70ea4f-4 VmMEr"
+          for="email"
+          required=""
+        >
+          Your email
+        </label>
+        <input
+          data-testid="input-email"
+          id="email"
+          name="email"
+          placeholder="Enter your email address"
+        />
+      </section>
+      <section
+        class="sc-ae70ea4f-2 emiEpD"
+      >
+        <label
+          class="sc-ae70ea4f-4 bfFRit"
+        >
+          I'm interested in 
+          <select
+            data-testid="select-category"
+            name="interestCategory"
+          >
+            <option
+              disabled=""
+              selected=""
+              value="default"
+            >
+              choose a category
+            </option>
+            <option
+              value="shoes"
+            >
+              Shoes
+            </option>
+            <option
+              value="heels"
+            >
+              Heels
+            </option>
+            <option
+              value="sandles"
+            >
+              Sandles
+            </option>
+            <option
+              value="handbags"
+            >
+              Handbags
+            </option>
+          </select>
+        </label>
+      </section>
+      <section
+        class="sc-ae70ea4f-2 emiEpD"
+      >
+        <input
+          data-testid="checkbox-terms"
+          id="terms"
+          name="terms"
+          type="checkbox"
+        />
+        <label
+          class="sc-ae70ea4f-4 VmMEr"
+          for="terms"
+          required=""
+        >
+          I agree to the 
+          <a
+            class="sc-ae70ea4f-1 kJNCBL"
+            href="#"
+          >
+            terms and conditions
+          </a>
+        </label>
+      </section>
+      <button
+        data-testid="button-submit"
+        type="submit"
+      >
+        Subscribe
+      </button>
+    </form>
+  </div>
+</div>
+`;

@@ -1,9 +1,12 @@
 import React, { ChangeEvent, FC, FormEvent, Key, useState } from 'react'
 import Link from 'next/link';
 import { ErrorMessage, FormSection, Label, SignupFormContainer, TermsLink } from "./SignupFormStyle";
+import { useAppDispatch } from '@/hooks/store';
+import { setNewsletterState } from '@/store/newsletterSlice';
 
-const SignupFormStructure: FC<{ message: string }> = ({ message }) => {
-  const [error, setError] = useState<Array<String>>([]);
+const SignupFormStructure: FC<{ termsUrl?: string }> = ({ termsUrl = '#' }) => {
+  const [validationErrors, setValidationErrors] = useState<Array<String>>([]);
+  const dispatch = useAppDispatch();
 
   const isEmailValid = (email: string) => {
     const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
@@ -12,7 +15,7 @@ const SignupFormStructure: FC<{ message: string }> = ({ message }) => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setError([]);
+    setValidationErrors([]);
 
     const form = e.currentTarget;
     const formData = new FormData(form);
@@ -22,29 +25,32 @@ const SignupFormStructure: FC<{ message: string }> = ({ message }) => {
     let isError = false;
 
     if (!('email' in formJson) || formJson.email === '') {
-      setError((prev) => [...prev, 'Please enter your email address'])
+      setValidationErrors((prev) => [...prev, 'Please enter your email address'])
       isError = true;
     } else {
       if (!isEmailValid(formJson.email.toString())) {
-        setError((prev) => [...prev, 'Invalid email format'])
+        setValidationErrors((prev) => [...prev, 'Invalid email format'])
         isError = true;
       }
     }
 
     if (!('terms' in formJson)) {
-      setError((prev) => [...prev, 'Please accept terms and conditions'])
+      setValidationErrors((prev) => [...prev, 'Please accept terms and conditions'])
       isError = true;
     }
 
     if (!isError) {
       console.log('submit form');
+
+      dispatch(setNewsletterState({
+        message: 'test',
+        isSubmitted: true
+      }));
     }
   }
 
-
   return (
     <SignupFormContainer>
-      <h1>SignupForm Content here</h1>
       <form onSubmit={handleSubmit}>
         <FormSection>
           <Label required htmlFor="email">
@@ -72,21 +78,21 @@ const SignupFormStructure: FC<{ message: string }> = ({ message }) => {
           <input type="checkbox" name="terms" id="terms" />
           <Label required htmlFor="terms">
             I agree to the { }
-            <Link href='#' passHref legacyBehavior>
+            <Link href={termsUrl} passHref legacyBehavior>
               <TermsLink>terms and conditions</TermsLink>
             </Link>
           </Label>
         </FormSection>
         {
-          error.length > 0 && (<ErrorMessage>
-            {error.map((error, index) => (
+          validationErrors.length > 0 && (<ErrorMessage>
+            {validationErrors.map((error, index) => (
               <p key={index}>
                 {error}
               </p>
             ))}
           </ErrorMessage>)
         }
-        <button type="submit">Subscribe to free newsletter</button>
+        <button type="submit">Subscribe</button>
       </form>
     </SignupFormContainer>
   );

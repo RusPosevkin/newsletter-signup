@@ -1,11 +1,13 @@
 import React from 'react'
 import AlertComponent from "./AlertStructure";
+import { useAppSelector } from '@/hooks/store';
 
 const Alert = () => {
-  const message = 'Replace this with content from Redux'
+  const newsletterState = useAppSelector((state) => state.newsletter.newsletterState);
 
   const componentProps = {
-    message
+    message: newsletterState.message,
+    showAlert: newsletterState.isSubmitted
   }
 
   return (

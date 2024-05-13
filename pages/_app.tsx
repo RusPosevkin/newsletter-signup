@@ -4,6 +4,7 @@ import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import GlobalStyle from "@/components/globalstyles";
 import { theme } from "@/configs";
 import Alert from "@/components/Alert";
+import ReduxProvider from "@/store/reduxProvider";
 
 const client = new ApolloClient({
   uri: 'https://swapi-graphql.netlify.app/.netlify/functions/index',
@@ -15,9 +16,11 @@ export default function App({ Component, pageProps }: AppProps) {
     <>
       <ApolloProvider client={client}>
         <ThemeProvider theme={theme}>
-          <GlobalStyle />
-          <Alert />
-          <Component {...pageProps} />
+          <ReduxProvider>
+            <GlobalStyle />
+            <Alert />
+            <Component {...pageProps} />
+          </ReduxProvider>
         </ThemeProvider>
       </ApolloProvider>
     </>

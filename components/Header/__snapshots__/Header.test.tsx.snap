@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`it should match the snapshot and render 1`] = `
+<div>
+  <div
+    class="sc-e64e39fe-0 gzxShV"
+  >
+    <a
+      href="/"
+    >
+      Shop
+    </a>
+  </div>
+</div>
+`;

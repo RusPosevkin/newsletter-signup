@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`it should match the snapshot and render 1`] = `
+<div>
+  <div
+    class="sc-1d4bfd53-0 UONRY"
+  >
+    © 2024
+  </div>
+</div>
+`;

@@ -1,12 +1,21 @@
-import React, { FC, FormEvent, Key, useRef, useState } from 'react'
+import React, { FC, FormEvent, useRef, useState } from 'react'
 import Link from 'next/link';
 
 import { useAppDispatch } from '@/hooks/store';
 import { setNewsletterState } from '@/store/newsletterSlice';
 import { getAlertMessage, validateSignUpForm } from '@/services';
-import { ErrorMessage, FormSection, Label, SignupFormContainer, TermsLink } from './SignupFormStyle';
+import {
+  CategorySelect,
+  EmailInput,
+  ErrorMessage,
+  FormSection,
+  Label,
+  SignupFormContainer,
+  SubmitButton,
+  TermsLink
+} from './SignupFormStyle';
 
-const SignupFormStructure: FC<{ termsUrl?: string }> = ({ termsUrl = '#' }) => {
+const SignupFormStructure: FC<ISignupForm> = ({ termsUrl = '#' }) => {
   const [validationErrors, setValidationErrors] = useState<Array<String>>([]);
   const dispatch = useAppDispatch();
   const formRef = useRef<HTMLFormElement>(null);
@@ -49,7 +58,7 @@ const SignupFormStructure: FC<{ termsUrl?: string }> = ({ termsUrl = '#' }) => {
           <Label required htmlFor="email">
             Your email
           </Label>
-          <input
+          <EmailInput
             id="email"
             name="email"
             data-testid="input-email"
@@ -59,13 +68,13 @@ const SignupFormStructure: FC<{ termsUrl?: string }> = ({ termsUrl = '#' }) => {
         <FormSection>
           <Label>
             I'm interested in { }
-            <select name="interestCategory" defaultValue="default" data-testid="select-category">
+            <CategorySelect name="interestCategory" defaultValue="default" data-testid="select-category">
               <option value="default" disabled>choose a category</option>
               <option value="shoes">Shoes</option>
               <option value="heels">Heels</option>
               <option value="sandles">Sandles</option>
               <option value="handbags">Handbags</option>
-            </select>
+            </CategorySelect>
           </Label>
         </FormSection>
         <FormSection>
@@ -86,7 +95,7 @@ const SignupFormStructure: FC<{ termsUrl?: string }> = ({ termsUrl = '#' }) => {
             ))}
           </ErrorMessage>)
         }
-        <button type="submit" data-testid="button-submit">Subscribe</button>
+        <SubmitButton type="submit" data-testid="button-submit">Subscribe</SubmitButton>
       </form>
     </SignupFormContainer>
   );

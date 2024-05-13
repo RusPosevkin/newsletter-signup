@@ -8,6 +8,7 @@ const Container = styled.div`
   align-items: center;
   height: 100vh;
   min-height: 100vh;
+  min-width: 330px;
 `;
 const Main = styled.main`
   padding: 5rem 0;
@@ -36,6 +37,12 @@ const Title = styled.h1`
   }
 `;
 
+const TitleAdaptive = styled(Title)`
+  @media only screen and (max-width: 768px) {
+    font-size: 2rem;
+  }
+`
+
 const Description = styled.p`
   text-align: center;
   line-height: 1.5;
@@ -51,4 +58,4 @@ const CodeTag = styled.code`
     Bitstream Vera Sans Mono, Courier New, monospace;
 `;
 
-export { Container, Main, Title, Description, CodeTag };
+export { Container, Main, Title, TitleAdaptive, Description, CodeTag };

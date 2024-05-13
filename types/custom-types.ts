@@ -3,6 +3,10 @@ interface IAlert {
   showAlert: boolean
 }
 
+interface ISignupForm {
+  termsUrl?: string
+}
+
 type FormDataEntries = {
   [k: string]: FormDataEntryValue
 }

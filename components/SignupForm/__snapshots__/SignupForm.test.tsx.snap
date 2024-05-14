@@ -3,21 +3,21 @@
 exports[`it should match the snapshot and render 1`] = `
 <div>
   <div
-    class="sc-6defc456-0 jICFgj"
+    class="sc-5e85a691-0 iWrDWg"
   >
     <form>
       <section
-        class="sc-6defc456-5 gBTBYM"
+        class="sc-5e85a691-5 eqjmCP"
       >
         <label
-          class="sc-6defc456-7 fNcIQY"
+          class="sc-5e85a691-7 enlDdX"
           for="email"
           required=""
         >
           Your email
         </label>
         <input
-          class="sc-6defc456-2 kvdUAp"
+          class="sc-5e85a691-2 iVykXC"
           data-testid="input-email"
           id="email"
           name="email"
@@ -25,14 +25,14 @@ exports[`it should match the snapshot and render 1`] = `
         />
       </section>
       <section
-        class="sc-6defc456-5 gBTBYM"
+        class="sc-5e85a691-5 eqjmCP"
       >
         <label
-          class="sc-6defc456-7 bEbuLm"
+          class="sc-5e85a691-7 URfRR"
         >
           I'm interested in 
           <select
-            class="sc-6defc456-3 ddjiAW"
+            class="sc-5e85a691-3 laqGYO"
             data-testid="select-category"
             name="interestCategory"
           >
@@ -42,6 +42,16 @@ exports[`it should match the snapshot and render 1`] = `
               value="default"
             >
               choose a category
+            </option>
+            <option
+              value="Film 1"
+            >
+              Film 1
+            </option>
+            <option
+              value="Film 2"
+            >
+              Film 2
             </option>
             <option
               value="shoes"
@@ -67,7 +77,7 @@ exports[`it should match the snapshot and render 1`] = `
         </label>
       </section>
       <section
-        class="sc-6defc456-5 gBTBYM"
+        class="sc-5e85a691-5 eqjmCP"
       >
         <input
           data-testid="checkbox-terms"
@@ -76,13 +86,13 @@ exports[`it should match the snapshot and render 1`] = `
           type="checkbox"
         />
         <label
-          class="sc-6defc456-7 fNcIQY"
+          class="sc-5e85a691-7 enlDdX"
           for="terms"
           required=""
         >
           I agree to the 
           <a
-            class="sc-6defc456-1 femBoP"
+            class="sc-5e85a691-1 dAQgco"
             href="#"
           >
             terms and conditions
@@ -90,7 +100,7 @@ exports[`it should match the snapshot and render 1`] = `
         </label>
       </section>
       <button
-        class="sc-6defc456-4 bBEfWK"
+        class="sc-5e85a691-4 LHkNh"
         data-testid="button-submit"
         type="submit"
       >

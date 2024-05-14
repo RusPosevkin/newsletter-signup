@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 export const SignupFormContainer = styled.div`
   display: flex;
@@ -22,7 +22,7 @@ export const EmailInput = styled.input`
 `;
 
 export const CategorySelect = styled.select`
-  width: 160px;
+  width: 190px;
   font-size: 0.9rem;
   border-radius: 0.3rem;
   background-color: rgb(255, 255, 255);
@@ -53,3 +53,18 @@ export const Label = styled.label<{ required?: boolean; }>`
     color: red;
   }
 `;
+
+const animation = keyframes`
+ to {
+    background-position: left;
+  }
+`
+export const Skeleton = styled.div`
+  display: block;
+  cursor: progress;
+  width: 300px;
+  height: 1em;
+  background: linear-gradient(90deg, #ddda 40%, #efefefaa, #ddda 60%) right / 300% 100%;
+  animation: ${animation} 1s linear infinite;
+  margin: 20px 0;
+`

@@ -12,10 +12,15 @@ const withProviders = (children: React.JSX.Element) => (
   </ThemeProvider>
 );
 
+const filmsDataMock = {
+  data: ['Film 1', 'Film 2'],
+  loading: false
+}
+
 test('it should match the snapshot and render', async () => {
   const { container } = render(
     withProviders(
-      <SignupForm />
+      <SignupForm films={filmsDataMock} />
     )
   );
 
@@ -33,10 +38,36 @@ test('it should match the snapshot and render', async () => {
   expect(submitButton).toBeInTheDocument();
 });
 
+test('it show loading page when films are loading', async () => {
+  const filmsDataLoadingMock = {
+    ...filmsDataMock,
+    loading: true
+  }
+  render(
+    withProviders(
+      <SignupForm films={filmsDataLoadingMock} />
+    )
+  );
+
+  const emailInput = screen.queryByTestId('input-email');
+  const categorySelect = screen.queryByTestId('select-category');
+  const termsCheckbox = screen.queryByTestId('checkbox-terms');
+  const submitButton = screen.queryByTestId('button-submit');
+
+  const skeletonLoadingSection = screen.getByTestId('skeleton-loading');
+
+  expect(emailInput).not.toBeInTheDocument();
+  expect(categorySelect).not.toBeInTheDocument();
+  expect(termsCheckbox).not.toBeInTheDocument();
+  expect(submitButton).not.toBeInTheDocument();
+
+  expect(skeletonLoadingSection).toBeInTheDocument();
+});
+
 test('it should validate empty email and not accepted terms and conditions', async () => {
   render(
     withProviders(
-      <SignupForm />
+      <SignupForm films={filmsDataMock} />
     )
   );
 
@@ -51,7 +82,7 @@ test('it should validate empty email and not accepted terms and conditions', asy
 test('it should validate incorrect email', async () => {
   render(
     withProviders(
-      <SignupForm />
+      <SignupForm films={filmsDataMock} />
     )
   );
 
@@ -69,7 +100,7 @@ test('it should validate incorrect email', async () => {
 test('it should reset previous validation errors between validations', async () => {
   render(
     withProviders(
-      <SignupForm />
+      <SignupForm films={filmsDataMock} />
     )
   );
 
@@ -93,7 +124,7 @@ test('it should reset previous validation errors between validations', async () 
 test('it should reset form after successful validation and form submit', async () => {
   render(
     withProviders(
-      <SignupForm />
+      <SignupForm films={filmsDataMock} />
     )
   );
 
@@ -116,3 +147,15 @@ test('it should reset form after successful validation and form submit', async (
   expect(categorySelect).toHaveValue('default');
   expect(termsCheckbox).not.toBeChecked();
 });
+
+test('it should add film options in select control', async () => {
+  render(
+    withProviders(
+      <SignupForm films={filmsDataMock} />
+    )
+  );
+
+  expect(screen.getByRole('option', { name: /Film 1/i })).toBeInTheDocument();
+  expect(screen.getByRole('option', { name: /Film 2/i })).toBeInTheDocument();
+});
+
